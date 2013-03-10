@@ -6,7 +6,7 @@
 	var canvas = canvasElement.get(0).getContext("2d");
 	
 	Frank.t2;
-	var MAX = 340;
+	Frank.MAX = 340;
 	var MIN = 0;
 	var speed = 10;
 	Frank.x = 400;
@@ -31,12 +31,12 @@
 	Frank.draw = function(vals){
 	    Frank.color = vals.color || Frank.color;
 	    Frank.x = vals.x || Frank.x;
-	    //DrawBar.y = vals.y || DrawBar.y;
 	    Frank.w = vals.w || Frank.w;
+	    Frank.MAX = vals.max || Frank.MAX;
 		Frank.t2 = setInterval(function(){
 			if(vals.temp > Frank.h){
 				Frank.h = Frank.h + 1;
-				if((Frank.h * (- 1)) == vals.temp * (- 1) || Frank.h >= MAX){clearInterval(Frank.t2);}
+				if((Frank.h * (- 1)) == vals.temp * (- 1) || Frank.h >= Frank.MAX){clearInterval(Frank.t2);}
 			}else if(vals.temp < Frank.h){
 				Frank.h = Frank.h - 1;
 				if(Frank.h == vals.temp || Frank.h < MIN){clearInterval(Frank.t2);}
@@ -61,7 +61,8 @@
           'y' : Frank.y,
           'w' : Frank.w,
           'temp' : Frank.h,
-          'color' : Frank.color
+          'color' : Frank.color,
+          'max' : Frank.MAX
         };
         var settings = $.extend( {}, defaults, options );
     	return this.each(function() {
